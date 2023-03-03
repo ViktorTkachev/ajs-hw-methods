@@ -24,6 +24,25 @@ class Character {
     this.health = health;
     this.level = level;
   }
+
+  levelUp() {
+    if (this.health <= 0) {
+      throw new Error('Cannot up the level a dead person');
+    }
+    this.level += 1;
+    this.attack += this.attack * 0.2;
+    this.defence += this.defence * 0.2;
+    this.health = 100;
+  }
+
+  damage(points) {
+    if (this.health > 0) {
+      this.health -= points * (1 - this.defence / 100);
+      if (this.health < 0) {
+        this.health = 0;
+      }
+    }
+  }
 }
 
 export default Character;
